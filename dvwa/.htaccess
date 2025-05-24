@@ -1,0 +1,23 @@
+ServerSignature Off
+Header always unset X-Powered-By
+Header always unset Server
+
+Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self'; object-src 'none'; base-uri 'self';"
+Header always set X-Content-Type-Options "nosniff"
+Header always set X-Frame-Options "SAMEORIGIN"
+Header always set X-XSS-Protection "1; mode=block"
+Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+FileETag None
+Header unset ETag
+Header unset X-Powered-By
+
+<FilesMatch "^\..*">
+  Require all denied
+</FilesMatch>
+
+# Block access to sensitive files
+<FilesMatch "(^robots\.txt|^sitemap\.xml|server-info|server-status)">
+   Require all denied
+</FilesMatch>
